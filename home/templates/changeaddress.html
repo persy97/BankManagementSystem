@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+{% block body %}
+    <center>
+<div style="max-width: 600px; margin-top: 40px;">
+<form action="{% url 'changeaddr' %}" method="POST">
+  <div class="form-group">
+      {% csrf_token %}
+    <label for="exampleInputEmail1">Request Address Change:</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ adrt.address}}" name="addrs" required>
+    <small id="emailHelp" class="form-text text-muted">Changes will be reflected only after it has been officially verified by the Bank.</small>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+
+    </center>
+{% endblock %}

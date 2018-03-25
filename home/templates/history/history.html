@@ -1,0 +1,108 @@
+{% include 'base/base.html' %}
+{% block body %}
+
+     <div class="col-md-4 col-sm-6 col-xs-12">
+     </div>
+     <div class="col-md-4 col-sm-6 col-xs-12">
+    <br><br>
+    <p> Your Accounts :
+    </p><br>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Account No.</th>
+      <th scope="col">Balance</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in currentuser %}
+    <tr>
+      <td scope="row">{{ i.accountno }}</td>
+      <td>{{ i.balance }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+    </table>
+     </div>
+     <div class="col-md-4 col-sm-6 col-xs-12">
+     <br><br>
+        Select the Bank Account Number to see the history:<br>
+          <form method="POST" action="{% url 'history' %}">
+          {% csrf_token %}
+              <select class="form-group col-lg-3" name="acntno">
+                  {% for i in currentuser %}
+                         <option value="{{ i.accountno }}">{{ i.accountno }}        </option>
+                    {% endfor %}
+
+              </select>
+          <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+          </form>
+     </div>
+
+
+
+    {% if aa %}
+        <br><hr><br>
+        <h3>Transaction History (Debit):</h3><br>
+
+        <table class="table" >
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">S.No.</th>
+                    <th scope="col">Account Number</th>
+                    <th scope="col">Receiver's Account Number</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for i in aa %}
+                {% if forloop.counter <= 5 %}
+                <tr>
+                  <th scope="row">{{ forloop.counter }}</th>
+                    <td> {{ i.accountno }} </th>
+                  <td>{{i.to}}</td>
+                  <td>{{  i.amount}}</td>
+
+                <td>{{ i.date }}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% endif %}
+    {% if daa %}
+        <br><hr><br>
+        <h3>Transaction History (Credit):</h3><br>
+        <table class="table" >
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">S.No.</th>
+                    <th scope="col">Account Number</th>
+                    <th scope="col">Sender's Account Number</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for i in daa %}
+                {% if forloop.counter <= 5 %}
+                <tr>
+                  <th scope="row">{{ forloop.counter }}</th>
+                  <td>{{i.to}}</td>
+                    <td> {{ i.accountno }} </th>
+                  <td>{{  i.amount}}</td>
+
+                <td>{{ i.date }}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% endif %}
+<br><br>
+{% endblock %}

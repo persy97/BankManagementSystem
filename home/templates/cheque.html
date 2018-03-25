@@ -1,0 +1,14 @@
+{% extends 'base/base.html' %}
+{% block body %}
+<center>
+    <div style="max-width: 400px; margin-top: 100px">
+    <form action="{% url 'cheque' %}" method="POST">
+        {% csrf_token %}
+        Apply for Cheque Book: <br><br>
+        <input type="checkbox" name="chequebook" value="1"> Check/Uncheck the box to apply for cheque book<br><br>
+        <button class="btn btn-success">Apply</button>
+    </form>
+
+    </div>
+</center>
+{% endblock %}

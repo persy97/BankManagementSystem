@@ -1,0 +1,75 @@
+{% extends 'base/base.html' %}
+{% block body %}
+
+    <br>{% if message %}<div class="alert alert-success" role="alert">
+  {{ message }}
+</div>
+
+    {% endif %}
+    {% if messagesss %}
+        <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">{{ messagesss }}</h4>
+        <p>Please note that it will be reflected on your profile once it is officially verified by the bank.</p>
+
+</div>
+    {% endif %}
+    {% if messages %}
+        <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">{{ messages }}</h4>
+        <p>It will be mailed at your present Address.</p>
+
+</div>
+    {% endif %}
+<div class="col-md-4 col-sm-4 col-xs-12">
+ </div>
+ <div class="col-md-4 col-sm-4 col-xs-12">
+ <table class="table" style="position: relative; margin-top: 40px;">
+<br>
+  Your Personal Details:
+  <tbody class="thead-light">
+    <tr>
+      <th scope="row">Name </th>
+      <td>{{ user.username }}</td>
+    </tr>
+
+  </tbody>
+     <tbody class="thead-light">
+    <tr>
+      <th scope="row">Address </th>
+      <td>{{ address.address }}</td>
+    </tr>
+
+  </tbody>
+     <tbody class="thead-light">
+        <tr>
+        <th scope="row">Total balance </th>
+      <td>{{ balance }}</td>
+    </tr>
+
+  </tbody>
+     <tbody class="thead-light">
+        <tr>
+        <th scope="row">Address Change Request</th>
+            {% if address.requestedaddress == '' %}
+            <td><p class='text-success'>Approved</p></td>
+            {% else %}
+                <td><b><p class='text-danger'>Pending</p></b> </td>
+            {% endif %}
+    </tr>
+ <tbody class="thead-light">
+        <tr>
+        <th scope="row">Application for cheque </th>
+            {%  if address.cheque == True %}
+      <td><p class="text-success">Applied</p> </td>
+                {% else %}
+                <td><p class="text-danger">Not Applied</p> </td>
+            {% endif %}
+    </tr>
+
+  </tbody>
+
+ </table>
+ </div>
+ <div class="col-md-4 col-sm-6 col-xs-12">
+ </div>
+{% endblock %}
